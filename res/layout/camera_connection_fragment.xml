@@ -37,9 +37,9 @@
         android:textSize="35sp"
         android:text="Take A Photo"
 
-        android:paddingTop="5dp"
+        android:paddingTop="45dp"
 
-        android:paddingBottom="4dp"
+        android:paddingBottom="45dp"
         android:layout_alignParentBottom="true"
         android:layout_height="wrap_content" />
 

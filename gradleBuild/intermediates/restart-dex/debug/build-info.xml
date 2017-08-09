@@ -6,23 +6,26 @@
     density="xxxhdpi"
     format="10"
     plugin-version="2.3.0"
-    timestamp="1502275531001"
+    timestamp="1502277830658"
     token="-4305770754470425427"
     verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="0" />
+        duration="136" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="0" />
+        duration="13" />
     <task
         name="verifier"
-        duration="0" />
+        duration="1" />
 
+    <artifact
+        location="/Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/gradleBuild/intermediates/split-apk/debug/slices/slice_7.apk"
+        type="SPLIT" />
     <artifact
         location="/Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/gradleBuild/outputs/apk/android-debug.apk"
         type="SPLIT_MAIN" />
@@ -67,16 +70,19 @@
     </build>
     <build
         build-mode="COLD"
-        timestamp="1502275278393"
+        timestamp="1502277585107"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="/Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/gradleBuild/outputs/apk/android-debug.apk"
+            type="SPLIT_MAIN" />
+    </build>
+    <build
+        build-mode="COLD"
+        timestamp="1502277830658"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="/Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/gradleBuild/intermediates/split-apk/debug/slices/slice_7.apk"
             type="SPLIT" />
-    </build>
-    <build
-        build-mode="COLD"
-        timestamp="1502275531001"
-        verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="/Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/gradleBuild/outputs/apk/android-debug.apk"
             type="SPLIT_MAIN" />
