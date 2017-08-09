@@ -25,6 +25,7 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 
 import android.media.ImageReader.OnImageAvailableListener;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Size;
 import android.util.TypedValue;
@@ -41,6 +42,8 @@ import org.tensorflow.demo.env.Logger;
 // Explicit import needed for internal Google builds.
 import org.tensorflow.demo.R;
 import org.tensorflow.sidra.DetectedActivity;
+
+import static java.lang.Thread.sleep;
 
 public class ClassifierActivity extends CameraActivity implements OnImageAvailableListener {
   private static final Logger LOGGER = new Logger();
@@ -76,7 +79,7 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
   //private static;li final String MODEL_FILE = "file:///android_asset/lesion_optt.pb";
  // private static final String LABEL_FILE = "file:///android_asset/lesion.txt";
   private static  final boolean MAINTAIN_ASPECT = true;
-  private static final Size DESIRED_PREVIEW_SIZE = new Size(6420, 480);
+  private static final Size DESIRED_PREVIEW_SIZE = new Size(0, 0);
 
 
   private Integer sensorOrientation;
@@ -152,6 +155,7 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
   }
 
   protected void processImageRGBbytes(int[] rgbBytes ) {
+      LOGGER.i("imagefound-RETURN: %s","whyyyyyyy" );
     rgbFrameBitmap.setPixels(rgbBytes, 0, previewWidth, 0, 0, previewWidth, previewHeight);
     final Canvas canvas = new Canvas(croppedBitmap);
     canvas.drawBitmap(rgbFrameBitmap, frameToCropTransform, null);
@@ -164,6 +168,15 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
         new Runnable() {
           @Override
           public void run() {
+
+              LOGGER.i("imagefound-RETURN: %s","yoooooo" );
+              if (! ClassifierActivity.this.isClickedButton){
+                  LOGGER.i("imagefound-RETURN: %s","RETURN" );
+                  return;
+              }else{
+                  LOGGER.i("imagefound-RETURN: %s","btter" );
+              }
+
             final long startTime = SystemClock.uptimeMillis();
             final List<Classifier.Recognition> results = classifier.recognizeImage(croppedBitmap);
             lastProcessingTimeMs = SystemClock.uptimeMillis() - startTime;
@@ -173,6 +186,7 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
             if (resultsView==null) {
               resultsView = (ResultsView) findViewById(R.id.results);
             }
+
 
             resultsView.setResults(results);
 
@@ -184,11 +198,12 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
             }
 
 
-            Intent _intent = new Intent(getApplicationContext(), DetectedActivity.class);
-            ByteArrayOutputStream _bs = new ByteArrayOutputStream();
-            cropCopyBitmap.compress(Bitmap.CompressFormat.JPEG, 100, _bs);
-            _intent.putExtra("byteArray", _bs.toByteArray());
-            startActivity(_intent);
+          Intent _intent = new Intent(getApplicationContext(), DetectedActivity.class);
+          ByteArrayOutputStream _bs = new ByteArrayOutputStream();
+              rgbFrameBitmap.compress(Bitmap.CompressFormat.JPEG, 99, _bs);
+          _intent.putExtra("byteArray", _bs.toByteArray());
+        //  startActivity(_intent);
+
 
 
           }

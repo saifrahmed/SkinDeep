@@ -9,7 +9,6 @@
     android:orientation="vertical"
     tools:context="org.tensorflow.sidra.SplashActivity">
 
-
     <ImageView
         android:layout_width="match_parent"
         android:src="@drawable/sid"
@@ -24,7 +23,5 @@
         android:textStyle="bold"
         android:gravity="center"
         android:layout_height="wrap_content" />
-
-
 
 </LinearLayout>

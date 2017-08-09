@@ -46,10 +46,10 @@ import org.tensorflow.demo.env.ImageUtils;
 import org.tensorflow.demo.env.Logger;
 
 // Explicit import needed for internal Google builds.
-import org.tensorflow.demo.R;
+
 
 public abstract class CameraActivity extends Activity implements OnImageAvailableListener, Camera.
-        PreviewCallback {
+        PreviewCallback, CameraConnectionFragment.SkinDeepListener {
   private static final Logger LOGGER = new Logger();
 
   private static final int PERMISSIONS_REQUEST = 1;
@@ -76,6 +76,16 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
   protected byte[][] yuvBytes=new byte[3][];
   protected int yRowStride;
 
+public boolean isClickedButton= false;
+
+
+  @Override
+  public void buttonSkinDeepClicked(boolean result) {
+    LOGGER.i("ERNESTTTTTTTT");
+
+    this.isClickedButton =result;
+  }
+
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     LOGGER.d("onCreate " + this);
@@ -83,6 +93,8 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
     getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
     setContentView(R.layout.activity_camera);
+
+
 
     if (hasPermission()) {
       setFragment();
@@ -129,6 +141,11 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
    */
   @Override
   public void onImageAvailable(final ImageReader reader) {
+
+
+
+
+   LOGGER.i("imagefound-PROCESS: %s","imagefound" );
     Image image = null;
     //We need wait until we have some size from onPreviewSizeChosen
     if (previewWidth == 0 || previewHeight == 0) {
@@ -330,15 +347,21 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
               getDesiredPreviewFrameSize());
 
       camera2Fragment.setCamera(cameraId);
+      camera2Fragment. addSkindDeeoListener(this);
       fragment = camera2Fragment;
+
     } else {
       fragment = new LegacyCameraConnectionFragment(this, getLayoutId());
+
     }
 
     getFragmentManager()
         .beginTransaction()
         .replace(R.id.container, fragment)
         .commit();
+
+
+
   }
 
   protected void fillBytes(final Plane[] planes, final byte[][] yuvBytes) {

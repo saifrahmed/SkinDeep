@@ -52,6 +52,7 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -65,7 +66,7 @@ import java.util.concurrent.TimeUnit;
 import org.tensorflow.demo.env.Logger;
 import org.tensorflow.demo.R;
 
-public class CameraConnectionFragment extends Fragment {
+public class CameraConnectionFragment extends Fragment implements View.OnClickListener{
   private static final Logger LOGGER = new Logger();
 
   public CameraConnectionFragment() {
@@ -77,7 +78,7 @@ public class CameraConnectionFragment extends Fragment {
    * containing a DESIRED_SIZE x DESIRED_SIZE square.
    */
   private static final int MINIMUM_PREVIEW_SIZE = 320;
-
+public Button cpatureBTN;
   /**
    * Conversion from screen rotation to JPEG orientation.
    */
@@ -119,12 +120,25 @@ public class CameraConnectionFragment extends Fragment {
             }
           };
 
+
+
   /**
    * Callback for Activities to use to initialize their data once the
    * selected preview size is known.
    */
   public interface ConnectionCallback {
     void onPreviewSizeChosen(Size size, int cameraRotation);
+  }
+
+
+  public SkinDeepListener listener;
+
+  public void addSkindDeeoListener(SkinDeepListener listener) {
+    this.listener = listener;
+  }
+
+  interface SkinDeepListener {
+    void buttonSkinDeepClicked(boolean result);
   }
 
   /**
@@ -228,6 +242,8 @@ public class CameraConnectionFragment extends Fragment {
   /** The input size in pixels desired by TensorFlow (width and height of a square bitmap). */
   private Size inputSize;
 
+  private Boolean isCaptured = false;
+
   /**
    * The layout identifier to inflate for this Fragment.
    */
@@ -324,9 +340,18 @@ public class CameraConnectionFragment extends Fragment {
   }
 
   @Override
-  public View onCreateView(
-          final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-    return inflater.inflate(layout, container, false);
+  public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+    View view = inflater.inflate(layout, container, false);
+    cpatureBTN = (Button) view.findViewById(R.id.btn);
+    cpatureBTN.setOnClickListener(this);
+    return view;
+  }
+
+
+  @Override
+  public void onClick(View view) {
+    this.isCaptured = true;
+      listener.buttonSkinDeepClicked(true);
   }
 
   @Override
@@ -527,7 +552,8 @@ public class CameraConnectionFragment extends Fragment {
           ImageReader.newInstance(
               previewSize.getWidth(), previewSize.getHeight(), ImageFormat.YUV_420_888, 2);
 
-      previewReader.setOnImageAvailableListener(imageListener, backgroundHandler);
+     previewReader.setOnImageAvailableListener(imageListener, backgroundHandler);
+
       previewRequestBuilder.addTarget(previewReader.getSurface());
 
       // Here, we create a CameraCaptureSession for camera preview.
