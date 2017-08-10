@@ -86,7 +86,7 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
   private Classifier classifier;
   private Matrix frameToCropTransform;
   private Matrix cropToFrameTransform;
-
+    private Matrix skinDeepFrameTransform;
 
   private BorderedText borderedText;
 
@@ -198,7 +198,7 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
               postInferenceCallback.run();
             }
 
-
+              LOGGER.i("imagefound-RETURN: %s","" +ClassifierActivity.this.isClickedButton);
 
               if (! ClassifierActivity.this.isClickedButton){
                   LOGGER.i("imagefound-RETURN: %s","RETURN" );
@@ -210,7 +210,7 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
                   if (results != null) {
                       for (final Classifier.Recognition recog : results) {
                           LOGGER.i( recog.getTitle() + ":YO " + recog.getConfidence());
-                          afterProcessing =  recog.getTitle() + ":" + recog.getConfidence();
+                          afterProcessing = afterProcessing +  recog.getTitle() + ":" + recog.getConfidence() + "\n";
 
                       }
                   }
@@ -219,7 +219,7 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
                   LOGGER.i("imagefound-RETURN: %s","better" );
                   Intent _intent = new Intent(getApplicationContext(), DetectedActivity.class);
                   ByteArrayOutputStream _bs = new ByteArrayOutputStream();
-                  rgbFrameBitmap.compress(Bitmap.CompressFormat.JPEG, 99, _bs);
+                  croppedBitmap.compress(Bitmap.CompressFormat.PNG, 99, _bs);
                   _intent.putExtra("byteArray", _bs.toByteArray());
                   _intent.putExtra("info", afterProcessing);
                   startActivity(_intent);

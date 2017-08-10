@@ -21,7 +21,7 @@ public class ResultActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
-        
+
 
         resultScan = (Button) findViewById(R.id.resultScan);
 

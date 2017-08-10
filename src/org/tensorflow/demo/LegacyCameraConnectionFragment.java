@@ -32,19 +32,22 @@ import java.io.IOException;
 
 import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
+import android.widget.Button;
 
 import org.tensorflow.demo.env.Logger;
 
 // Explicit import needed for internal Google builds.
 import org.tensorflow.demo.R;
 
-public class LegacyCameraConnectionFragment extends Fragment {
+public class LegacyCameraConnectionFragment extends Fragment  implements View.OnClickListener{
 
   private Camera camera;
   private static final Logger LOGGER = new Logger();
   private Camera.PreviewCallback imageListener;
+  public Button cpatureBTN;
+public LegacyCameraConnectionFragment(){
 
-
+}
   /**
    * The layout identifier to inflate for this Fragment.
    */
@@ -57,6 +60,25 @@ public class LegacyCameraConnectionFragment extends Fragment {
     this.layout = layout;
   }
 
+
+
+  public LegacyCameraConnectionFragment.SkinDeepListenerLegacy listenerLegacy;
+
+  public void addSkindDeeoListeneLegacy(LegacyCameraConnectionFragment.SkinDeepListenerLegacy listener) {
+    this.listenerLegacy = listener;
+  }
+
+  interface SkinDeepListenerLegacy {
+    void buttonSkinDeepClickedLegacy(boolean result);
+  }
+
+public boolean isCaptured;
+
+  @Override
+  public void onClick(View view) {
+    this.isCaptured = true;
+    listenerLegacy.buttonSkinDeepClickedLegacy(true);
+  }
   /**
    * Conversion from screen rotation to JPEG orientation.
    */
@@ -131,7 +153,10 @@ public class LegacyCameraConnectionFragment extends Fragment {
   @Override
   public View onCreateView(
       final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-    return inflater.inflate(layout, container, false);
+    View view = inflater.inflate(layout, container, false);
+    cpatureBTN = (Button) view.findViewById(R.id.btn);
+    cpatureBTN.setOnClickListener(this);
+    return view;
   }
 
   @Override
