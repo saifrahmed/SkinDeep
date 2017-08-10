@@ -12,8 +12,11 @@ import android.widget.ImageView;
 import org.tensorflow.demo.Classifier;
 import org.tensorflow.demo.ClassifierActivity;
 import org.tensorflow.demo.R;
+import org.tensorflow.demo.env.Logger;
+
 
 public class DetectedActivity extends Activity {
+    private static final Logger LOGGER = new Logger();
     public Button resultScan, sendtoserver;
     public ImageView img;
     @Override
@@ -33,12 +36,19 @@ public class DetectedActivity extends Activity {
         });
 
 
+        Intent i = getIntent();
+       final String infores = i.getStringExtra("info");
+        LOGGER.i( "food");
+        LOGGER.i( infores);
+
         sendtoserver = (Button) findViewById(R.id.sendtoserver);
 
         sendtoserver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent i = new Intent(getApplicationContext(), ResultActivity.class);
+                 i.putExtra("info", infores);
                 startActivity(i);
 
             }

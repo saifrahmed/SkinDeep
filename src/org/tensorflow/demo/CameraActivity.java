@@ -1,52 +1,37 @@
-/*
- * Copyright 2016 The TensorFlow Authors. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
-package org.tensorflow.demo;
+        package org.tensorflow.demo;
 
-import android.Manifest;
-import android.app.Activity;
-import android.app.Fragment;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.hardware.Camera;
-import android.hardware.camera2.CameraAccessException;
-import android.hardware.camera2.CameraCharacteristics;
-import android.hardware.camera2.CameraManager;
-import android.hardware.camera2.params.StreamConfigurationMap;
-import android.media.Image;
-import android.media.Image.Plane;
-import android.media.ImageReader;
-import android.media.ImageReader.OnImageAvailableListener;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Trace;
-import android.util.Size;
-import android.view.KeyEvent;
-import android.view.WindowManager;
-import android.widget.Toast;
-import java.nio.ByteBuffer;
+        import android.Manifest;
+        import android.app.Activity;
+        import android.app.Fragment;
+        import android.content.Context;
+        import android.content.pm.PackageManager;
+        import android.graphics.Bitmap;
+        import android.hardware.Camera;
+        import android.hardware.camera2.CameraAccessException;
+        import android.hardware.camera2.CameraCharacteristics;
+        import android.hardware.camera2.CameraManager;
+        import android.hardware.camera2.params.StreamConfigurationMap;
+        import android.media.Image;
+        import android.media.Image.Plane;
+        import android.media.ImageReader;
+        import android.media.ImageReader.OnImageAvailableListener;
+        import android.os.Build;
+        import android.os.Bundle;
+        import android.os.Handler;
+        import android.os.HandlerThread;
+        import android.os.Trace;
+        import android.util.Size;
+        import android.view.KeyEvent;
+        import android.view.WindowManager;
+        import android.widget.Toast;
+        import java.nio.ByteBuffer;
 
-import org.tensorflow.demo.env.ImageUtils;
-import org.tensorflow.demo.env.Logger;
+        import org.tensorflow.demo.env.ImageUtils;
+        import org.tensorflow.demo.env.Logger;
 
 // Explicit import needed for internal Google builds.
-
+        import org.tensorflow.demo.R;
 
 public abstract class CameraActivity extends Activity implements OnImageAvailableListener, Camera.
         PreviewCallback, CameraConnectionFragment.SkinDeepListener {
@@ -76,16 +61,6 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
   protected byte[][] yuvBytes=new byte[3][];
   protected int yRowStride;
 
-public boolean isClickedButton= false;
-
-
-  @Override
-  public void buttonSkinDeepClicked(boolean result) {
-    LOGGER.i("ERNESTTTTTTTT");
-
-    this.isClickedButton =result;
-  }
-
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     LOGGER.d("onCreate " + this);
@@ -93,8 +68,6 @@ public boolean isClickedButton= false;
     getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
     setContentView(R.layout.activity_camera);
-
-
 
     if (hasPermission()) {
       setFragment();
@@ -136,16 +109,21 @@ public boolean isClickedButton= false;
     processImageRGBbytes(rgbBytes);
   }
 
+
+  public boolean isClickedButton= false;
+
+  @Override
+  public void buttonSkinDeepClicked(boolean result) {
+    LOGGER.i("imagefound-RETURN: %s","ERNEST" );
+
+    this.isClickedButton =result;
+  }
+
   /**
    * Callback for Camera2 API
    */
   @Override
   public void onImageAvailable(final ImageReader reader) {
-
-
-
-
-   LOGGER.i("imagefound-PROCESS: %s","imagefound" );
     Image image = null;
     //We need wait until we have some size from onPreviewSizeChosen
     if (previewWidth == 0 || previewHeight == 0) {
@@ -171,16 +149,16 @@ public boolean isClickedButton= false;
       final int uvRowStride = planes[1].getRowStride();
       final int uvPixelStride = planes[1].getPixelStride();
       ImageUtils.convertYUV420ToARGB8888(
-          yuvBytes[0],
-          yuvBytes[1],
-          yuvBytes[2],
-          rgbBytes,
-          previewWidth,
-          previewHeight,
-          yRowStride,
-          uvRowStride,
-          uvPixelStride,
-          false);
+              yuvBytes[0],
+              yuvBytes[1],
+              yuvBytes[2],
+              rgbBytes,
+              previewWidth,
+              previewHeight,
+              yRowStride,
+              uvRowStride,
+              uvPixelStride,
+              false);
       image.close();
 
     } catch (final Exception e) {
@@ -252,12 +230,12 @@ public boolean isClickedButton= false;
 
   @Override
   public void onRequestPermissionsResult(
-      final int requestCode, final String[] permissions, final int[] grantResults) {
+          final int requestCode, final String[] permissions, final int[] grantResults) {
     switch (requestCode) {
       case PERMISSIONS_REQUEST: {
         if (grantResults.length > 0
-            && grantResults[0] == PackageManager.PERMISSION_GRANTED
-            && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
           setFragment();
         } else {
           requestPermission();
@@ -269,7 +247,7 @@ public boolean isClickedButton= false;
   private boolean hasPermission() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
       return checkSelfPermission(PERMISSION_CAMERA) == PackageManager.PERMISSION_GRANTED &&
-          checkSelfPermission(PERMISSION_STORAGE) == PackageManager.PERMISSION_GRANTED;
+              checkSelfPermission(PERMISSION_STORAGE) == PackageManager.PERMISSION_GRANTED;
     } else {
       return true;
     }
@@ -278,9 +256,9 @@ public boolean isClickedButton= false;
   private void requestPermission() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
       if (shouldShowRequestPermissionRationale(PERMISSION_CAMERA) ||
-          shouldShowRequestPermissionRationale(PERMISSION_STORAGE)) {
+              shouldShowRequestPermissionRationale(PERMISSION_STORAGE)) {
         Toast.makeText(CameraActivity.this,
-            "Camera AND storage permission are required for this demo", Toast.LENGTH_LONG).show();
+                "Camera AND storage permission are required for this demo", Toast.LENGTH_LONG).show();
       }
       requestPermissions(new String[] {PERMISSION_CAMERA, PERMISSION_STORAGE}, PERMISSIONS_REQUEST);
     }
@@ -309,14 +287,14 @@ public boolean isClickedButton= false;
         }
 
         final StreamConfigurationMap map =
-            characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
+                characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
 
         if (map == null) {
           continue;
         }
 
         useCamera2API = isHardwareLevelSupported(characteristics,
-            CameraCharacteristics.INFO_SUPPORTED_HARDWARE_LEVEL_FULL);
+                CameraCharacteristics.INFO_SUPPORTED_HARDWARE_LEVEL_FULL);
         LOGGER.i("Camera API lv2?: %s", useCamera2API);
         return cameraId;
       }
@@ -333,35 +311,31 @@ public boolean isClickedButton= false;
     Fragment fragment;
     if (useCamera2API) {
       CameraConnectionFragment camera2Fragment =
-          CameraConnectionFragment.newInstance(
-              new CameraConnectionFragment.ConnectionCallback() {
-                @Override
-                public void onPreviewSizeChosen(final Size size, final int rotation) {
-                  previewHeight = size.getHeight();
-                  previewWidth = size.getWidth();
-                  CameraActivity.this.onPreviewSizeChosen(size, rotation);
-                }
-              },
-              this,
-              getLayoutId(),
-              getDesiredPreviewFrameSize());
+              CameraConnectionFragment.newInstance(
+                      new CameraConnectionFragment.ConnectionCallback() {
+                        @Override
+                        public void onPreviewSizeChosen(final Size size, final int rotation) {
+                          previewHeight = size.getHeight();
+                          previewWidth = size.getWidth();
+                          CameraActivity.this.onPreviewSizeChosen(size, rotation);
+                        }
+                      },
+                      this,
+                      getLayoutId(),
+                      getDesiredPreviewFrameSize());
 
       camera2Fragment.setCamera(cameraId);
-      camera2Fragment. addSkindDeeoListener(this);
-      fragment = camera2Fragment;
 
+      camera2Fragment.addSkindDeeoListener(this);
+      fragment = camera2Fragment;
     } else {
       fragment = new LegacyCameraConnectionFragment(this, getLayoutId());
-
     }
 
     getFragmentManager()
-        .beginTransaction()
-        .replace(R.id.container, fragment)
-        .commit();
-
-
-
+            .beginTransaction()
+            .replace(R.id.container, fragment)
+            .commit();
   }
 
   protected void fillBytes(final Plane[] planes, final byte[][] yuvBytes) {

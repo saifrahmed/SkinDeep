@@ -79,7 +79,7 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
   //private static;li final String MODEL_FILE = "file:///android_asset/lesion_optt.pb";
  // private static final String LABEL_FILE = "file:///android_asset/lesion.txt";
   private static  final boolean MAINTAIN_ASPECT = true;
-  private static final Size DESIRED_PREVIEW_SIZE = new Size(0, 0);
+    private static final Size DESIRED_PREVIEW_SIZE = new Size(6420, 480);
 
 
   private Integer sensorOrientation;
@@ -155,7 +155,12 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
   }
 
   protected void processImageRGBbytes(int[] rgbBytes ) {
-      LOGGER.i("imagefound-RETURN: %s","whyyyyyyy" );
+
+
+      LOGGER.i("imagefound-RETURN: %s","yoooooo" );
+
+
+
     rgbFrameBitmap.setPixels(rgbBytes, 0, previewWidth, 0, 0, previewWidth, previewHeight);
     final Canvas canvas = new Canvas(croppedBitmap);
     canvas.drawBitmap(rgbFrameBitmap, frameToCropTransform, null);
@@ -169,13 +174,7 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
           @Override
           public void run() {
 
-              LOGGER.i("imagefound-RETURN: %s","yoooooo" );
-              if (! ClassifierActivity.this.isClickedButton){
-                  LOGGER.i("imagefound-RETURN: %s","RETURN" );
-                  return;
-              }else{
-                  LOGGER.i("imagefound-RETURN: %s","btter" );
-              }
+
 
             final long startTime = SystemClock.uptimeMillis();
             final List<Classifier.Recognition> results = classifier.recognizeImage(croppedBitmap);
@@ -188,7 +187,9 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
             }
 
 
-            resultsView.setResults(results);
+           // resultsView.setResults(results);
+
+
 
             requestRender();
 
@@ -198,11 +199,33 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
             }
 
 
-          Intent _intent = new Intent(getApplicationContext(), DetectedActivity.class);
-          ByteArrayOutputStream _bs = new ByteArrayOutputStream();
-              rgbFrameBitmap.compress(Bitmap.CompressFormat.JPEG, 99, _bs);
-          _intent.putExtra("byteArray", _bs.toByteArray());
-        //  startActivity(_intent);
+
+              if (! ClassifierActivity.this.isClickedButton){
+                  LOGGER.i("imagefound-RETURN: %s","RETURN" );
+                  // return;
+              }else{
+
+                  String afterProcessing = "";
+
+                  if (results != null) {
+                      for (final Classifier.Recognition recog : results) {
+                          LOGGER.i( recog.getTitle() + ":YO " + recog.getConfidence());
+                          afterProcessing =  recog.getTitle() + ":" + recog.getConfidence();
+
+                      }
+                  }
+
+
+                  LOGGER.i("imagefound-RETURN: %s","better" );
+                  Intent _intent = new Intent(getApplicationContext(), DetectedActivity.class);
+                  ByteArrayOutputStream _bs = new ByteArrayOutputStream();
+                  rgbFrameBitmap.compress(Bitmap.CompressFormat.JPEG, 99, _bs);
+                  _intent.putExtra("byteArray", _bs.toByteArray());
+                  _intent.putExtra("info", afterProcessing);
+                  startActivity(_intent);
+              }
+
+
 
 
 
