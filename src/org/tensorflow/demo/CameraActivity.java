@@ -34,7 +34,7 @@
         import org.tensorflow.demo.R;
 
 public abstract class CameraActivity extends Activity implements OnImageAvailableListener, Camera.
-        PreviewCallback, CameraConnectionFragment.SkinDeepListener {
+        PreviewCallback, CameraConnectionFragment.SkinDeepListener , LegacyCameraConnectionFragment.SkinDeepListenerLegacy{
   private static final Logger LOGGER = new Logger();
 
   private static final int PERMISSIONS_REQUEST = 1;
@@ -119,6 +119,13 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
     this.isClickedButton =result;
   }
 
+
+  @Override
+  public void buttonSkinDeepClickedLegacy(boolean result) {
+    LOGGER.i("imagefound-RETURN: %s","ERNEST" );
+
+    this.isClickedButton =result;
+  }
   /**
    * Callback for Camera2 API
    */
@@ -329,7 +336,10 @@ public abstract class CameraActivity extends Activity implements OnImageAvailabl
       camera2Fragment.addSkindDeeoListener(this);
       fragment = camera2Fragment;
     } else {
-      fragment = new LegacyCameraConnectionFragment(this, getLayoutId());
+
+      LegacyCameraConnectionFragment legacyFrag  = new LegacyCameraConnectionFragment(this, getLayoutId());
+      legacyFrag.addSkindDeeoListeneLegacy(this);
+      fragment =legacyFrag;
     }
 
     getFragmentManager()
