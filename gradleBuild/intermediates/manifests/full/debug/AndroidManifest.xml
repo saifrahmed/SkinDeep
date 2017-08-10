@@ -53,16 +53,6 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="org.tensorflow.demo.DetectorActivity"
-            android:label="@string/activity_name_detection"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="org.tensorflow.demo.StylizeActivity"
-            android:label="@string/activity_name_stylize"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name="org.tensorflow.sidra.DetectedActivity"
             android:label="@string/title_activity_detected"
             android:screenOrientation="portrait" />

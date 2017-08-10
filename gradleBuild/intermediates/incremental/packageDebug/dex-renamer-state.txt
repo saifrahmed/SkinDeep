@@ -1,4 +1,4 @@
-#Sun Aug 06 11:23:00 AST 2017
+#Wed Aug 09 15:16:18 AST 2017
 base.0=/Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/gradleBuild/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_b4d576efa096b119106266d6a05879d2de6559fc
 renamed.1=classes.dex
 renamed.0=classes2.dex

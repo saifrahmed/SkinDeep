@@ -36,18 +36,20 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int tile=0x7f020002;
     }
     public static final class id {
-        public static final int black=0x7f090008;
+        public static final int black=0x7f09000a;
+        public static final int btn=0x7f090009;
         public static final int container=0x7f090000;
-        public static final int debug_overlay=0x7f090007;
-        public static final int grid_layout=0x7f090009;
+        public static final int debug_overlay=0x7f090008;
+        public static final int grid_layout=0x7f09000b;
         public static final int img=0x7f090002;
-        public static final int overlay=0x7f09000a;
-        public static final int resultScan=0x7f090004;
+        public static final int info=0x7f090004;
+        public static final int overlay=0x7f09000c;
+        public static final int resultScan=0x7f090005;
         public static final int resultScanBtn=0x7f090001;
-        public static final int results=0x7f090006;
+        public static final int results=0x7f090007;
         public static final int sendtoserver=0x7f090003;
-        public static final int texture=0x7f090005;
-        public static final int tracking_overlay=0x7f09000b;
+        public static final int texture=0x7f090006;
+        public static final int tracking_overlay=0x7f09000d;
     }
     public static final class layout {
         public static final int activity_camera=0x7f040000;

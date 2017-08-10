@@ -16,7 +16,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="918b7d9d63790ce6b3c039de2bdaaf6a507b7365">
+        sha1="8b8307c3778ce44f0cc56d926e4417ed2601cad3">
         <dex dex="/Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/gradleBuild/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_b4d576efa096b119106266d6a05879d2de6559fc/classes.dex" />
     </item>
 

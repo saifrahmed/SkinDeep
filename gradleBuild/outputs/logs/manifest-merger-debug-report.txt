@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:16:1-79:12
+ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:16:1-67:12
 	package
 		ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:17:5-34
 	xmlns:android
@@ -36,7 +36,7 @@ ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/Andro
 	android:name
 		ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:30:22-77
 application
-ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:32:5-77:19
+ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:32:5-65:19
 	android:label
 		ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:35:9-33
 	android:allowBackup
@@ -75,35 +75,19 @@ ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/Andro
 		ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:52:13-65
 	android:name
 		ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:51:13-47
-activity#org.tensorflow.demo.DetectorActivity
-ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:56:9-61:20
-	android:screenOrientation
-		ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:59:13-49
-	android:label
-		ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:58:13-60
-	android:name
-		ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:57:13-45
-activity#org.tensorflow.demo.StylizeActivity
-ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:62:9-67:20
-	android:screenOrientation
-		ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:65:13-49
-	android:label
-		ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:64:13-58
-	android:name
-		ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:63:13-44
 activity#org.tensorflow.sidra.DetectedActivity
-ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:68:9-71:63
+ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:56:9-59:63
 	android:screenOrientation
-		ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:70:13-49
+		ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:58:13-49
 	android:label
-		ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:71:13-60
+		ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:59:13-60
 	android:name
-		ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:69:13-65
+		ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:57:13-65
 activity#org.tensorflow.sidra.ResultActivity
-ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:72:9-75:61
+ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:60:9-63:61
 	android:screenOrientation
-		ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:74:13-49
+		ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:62:13-49
 	android:label
-		ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:75:13-58
+		ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:63:13-58
 	android:name
-		ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:73:13-63
+		ADDED from /Users/flexpeace/Desktop/tensorflow/tensorflow/examples/android/AndroidManifest.xml:61:13-63
