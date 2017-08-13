@@ -16,6 +16,7 @@
 
 // The cmake build only creates libtensorflow_demo.so. In this situation,
 // libtensorflow_inference.so will be acquired via the tensorflow.aar dependency.
+def projPath = '';
 
 // It is necessary to customize Gradle's build directory, as otherwise
 // it will conflict with the BUILD file used by Bazel on case-insensitive OSs.
@@ -54,12 +55,12 @@ def nativeOutDir = 'libs/' + cpuType
 
 // Default to building with Bazel and override with make if requested.
 def nativeBuildRule = 'buildNativeBazel'
-def demoLibPath = '../../../bazel-bin/tensorflow/examples/android/libtensorflow_demo.so'
-def inferenceLibPath = '../../../bazel-bin/tensorflow/contrib/android/libtensorflow_inference.so'
+def demoLibPath = projPath + '../../../bazel-bin/tensorflow/examples/android/libtensorflow_demo.so'
+def inferenceLibPath = projPath + '../../../bazel-bin/tensorflow/contrib/android/libtensorflow_inference.so'
 if (nativeBuildSystem == 'makefile') {
     nativeBuildRule = 'buildNativeMake'
-    demoLibPath = '../../../tensorflow/contrib/makefile/gen/lib/libtensorflow_demo.so'
-    inferenceLibPath = '../../../tensorflow/contrib/makefile/gen/lib/libtensorflow_inference.so'
+    demoLibPath = projPath + '../../../tensorflow/contrib/makefile/gen/lib/libtensorflow_demo.so'
+    inferenceLibPath = projPath + '../../../tensorflow/contrib/makefile/gen/lib/libtensorflow_inference.so'
 }
 
 // If building with Bazel, this is the location of the bazel binary.
@@ -107,13 +108,13 @@ android {
             if (nativeBuildSystem == 'bazel' || nativeBuildSystem == 'makefile') {
                 // TensorFlow Java API sources.
                 java {
-                    srcDir '../../java/src/main/java'
+                    srcDir projPath + '../../java/src/main/java'
                     exclude '**/examples/**'
                 }
 
                 // Android TensorFlow wrappers, etc.
                 java {
-                    srcDir '../../contrib/android/java'
+                    srcDir projPath + '../../contrib/android/java'
                 }
             }
             // Android demo app sources.
@@ -136,7 +137,7 @@ android {
 }
 
 task buildNativeBazel(type: Exec) {
-    workingDir '../../..'
+    workingDir projPath + '../../..'
     commandLine bazelLocation, 'build', '-c', 'opt',  \
          'tensorflow/examples/android:tensorflow_native_libs',  \
          '--crosstool_top=//external:android/crosstool',  \
@@ -149,7 +150,7 @@ task buildNativeMake(type: Exec) {
     // Tip: install ccache and uncomment the following to speed up
     // builds significantly.
     // environment "CC_PREFIX", 'ccache'
-    workingDir '../../..'
+    workingDir projPath + '../../..'
     commandLine 'tensorflow/contrib/makefile/build_all_android.sh',  \
          '-s',  \
          'tensorflow/contrib/makefile/sub_makefiles/android/Makefile.in',  \
