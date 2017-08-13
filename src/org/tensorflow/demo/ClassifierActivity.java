@@ -64,20 +64,18 @@ public class ClassifierActivity extends CameraActivity implements OnImageAvailab
   // --input_node_names="Mul" \
   // --output_node_names="final_result" \
   // --input_binary=true
-  private static final int INPUT_SIZE = 224;
-  private static final int IMAGE_MEAN = 117;
-  private static final float IMAGE_STD = 1;
-  private static final String INPUT_NAME = "input";
-  private static final String OUTPUT_NAME = "output";
+  private static final int INPUT_SIZE = 244;
+  private static final int IMAGE_MEAN = 0;
+  private static final float IMAGE_STD = 255f;
+  private static final String INPUT_NAME = "conv2d_1_input";
+  private static final String OUTPUT_NAME = "dense_3/Sigmoid";
 
 
   //load inception graph from Assest files
-  private static final String MODEL_FILE = "file:///android_asset/tensorflow_inception_graph.pb";
+  private static final String MODEL_FILE = "file:///android_asset/skin6.pb";
  private static final String LABEL_FILE =
-      "file:///android_asset/imagenet_comp_graph_label_strings.txt";
+      "file:///android_asset/skin_labels.txt";
 
-  //private static;li final String MODEL_FILE = "file:///android_asset/lesion_optt.pb";
- // private static final String LABEL_FILE = "file:///android_asset/lesion.txt";
   private static  final boolean MAINTAIN_ASPECT = true;
     private static final Size DESIRED_PREVIEW_SIZE = new Size(6420, 480);
 
